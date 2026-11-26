@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jurnal | My Little Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+ </head>
+ <body>
+ <style>
+:root{
+  --bg:#f5f4ec;
+  --surface:rgba(255,255,255,.72);
+  --surface-solid:#fffefa;
+  --text:#24483f;
+  --muted:#71877e;
+  --primary:#258d7b;
+  --primary-dark:#176b5d;
+  --mint:#cdeade;
+  --line:rgba(37,110,94,.14);
+  --shadow:0 22px 60px rgba(39,91,76,.12);
+  --cream:#f4ead7;
+  --lavender:#e9e2f0;
+  /* alias names used by other pages */
+  --card:var(--surface-solid);
+  --secondary:var(--mint);
+}
+[data-theme="dark"]{
+  --bg:#14231f;
+  --surface:rgba(35,57,50,.78);
+  --surface-solid:#20372f;
+  --text:#e4f2e9;
+  --muted:#a3b9ae;
+  --primary:#70cdb4;
+  --primary-dark:#a4e5d2;
+  --mint:#284b40;--line:rgba(172,224,204,.15);
+  --shadow:0 22px 60px rgba(0,0,0,.25);
+  --cream:#514a3c;
+  --lavender:#443d50;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .35s,color .35s}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+
+
+.site-header{
+  width:min(1180px,calc(100% - 48px));
+  margin:20px auto 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;gap:20px;
+  position:relative;
+  z-index:20
+}
+.brand b{
+  color:var(--primary)
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:15px;
+  letter-spacing:-.5px;
+  white-space:nowrap
+}
+.brand-mark{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  background:var(--mint);
+  color:var(--primary-dark);
+  border-radius:12px;
+  font-size:21px
+}
+.floating-nav{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:7px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:50px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px)
+}
+.nav-link:hover,.nav-link.active{
+  background:var(--mint);
+  color:var(--primary-dark)
+}
+.nav-link{
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 13px;
+  border-radius:30px;
+  transition:.25s
+}
+.header-actions{
+  display:flex;
+  gap:8px
+}
+.icon-button,.menu-toggle{
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:var(--surface);
+  color:var(--text);
+  cursor:pointer;
+  box-shadow:var(--shadow)
+}
+.icon-button{
+  font-size:18px
+}
+.menu-toggle{
+  display:none
+}
+.reveal.visible{
+    opacity:1;transform:translateY(0)
+  }
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .7s ease,transform .7s ease}
+
+@media (max-width:900px){
+  .site-header{width:calc(100% - 32px)}
+  .floating-nav{gap:0}
+  .nav-link{padding:9px;font-size:10px}
+}
+@media (max-width:650px){
+  .site-header{margin-top:12px}
+  .brand{font-size:13px}
+  .menu-toggle{display:block}
+  .floating-nav{display:none;position:absolute;top:52px;right:0;left:0;padding:12px;border-radius:20px;flex-wrap:wrap;justify-content:center;background:var(--surface-solid)}
+  .floating-nav.open{display:flex}
+  .nav-link{font-size:11px;padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+.journal{
+  width:min(840px,calc(100% - 40px));
+  margin:0 auto;
+  padding:48px 0 70px
+}
+.j-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:32px;
+  margin-bottom:44px
+}
+.j-head h1{
+  font-family:"Caveat",cursive;
+  font-size:clamp(64px,11vw,104px);
+  font-weight:700;
+  line-height:.9;
+  letter-spacing:0;
+  transform:rotate(-1.5deg);
+  transform-origin:left bottom
+}
+.j-head p{
+  margin-top:18px;
+  max-width:34ch;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.7
+}
+.sticky{
+  flex:0 0 190px;
+  margin-top:10px;
+  padding:24px 18px 18px;
+  background:var(--lavender);
+  color:var(--text);
+  font-family:"Caveat",cursive;
+  font-size:23px;
+  line-height:1.15;
+  transform:rotate(2.5deg);
+  box-shadow:3px 6px 14px rgba(0,0,0,.12);
+  position:relative
+}
+.sticky::before{
+  content:"";
+  position:absolute;
+  top:-9px;
+  left:50%;
+  width:70px;
+  height:20px;
+  margin-left:-35px;
+  background:var(--cream);
+  opacity:.85;
+  transform:rotate(-3deg)
+}
+.month{
+  font-family:"Caveat",cursive;
+  font-size:34px;
+  font-weight:700;
+  margin:40px 0 14px;
+  color:var(--primary)
+}
+.entry{
+  display:grid;
+  grid-template-columns:96px 1fr;
+  gap:26px;
+  margin-bottom:30px
+}
+.entry time{
+  font-family:"Caveat",cursive;
+  text-align:right;
+  line-height:1;
+  padding-top:12px;
+  color:var(--muted);
+  font-size:21px
+}
+.entry time b{
+  display:block;
+  font-size:58px;
+  font-weight:700;
+  color:var(--text)
+}
+.paper{
+  position:relative;
+  padding:20px 28px 22px 54px;
+  background-color:var(--surface-solid);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--line) 31px 32px);
+  background-position:0 20px;
+  border:1px solid var(--line);
+  border-radius:3px 12px 4px 10px;
+  box-shadow:var(--shadow);
+  line-height:32px;
+  font-size:16px
+}
+.paper::before{
+  content:"";
+  position:absolute;
+  left:36px;
+  top:0;
+  bottom:0;
+  width:1px;
+  background:rgba(205,95,95,.4)
+}
+.entry:nth-of-type(odd) 
+.paper{
+  transform:rotate(-.3deg)
+}
+.entry:nth-of-type(even) 
+.paper{
+  transform:rotate(.3deg)
+}
+.paper h2{
+  font-family:"Caveat",cursive;
+  font-size:30px;
+  font-weight:700;
+  line-height:32px;
+  letter-spacing:0
+}
+.paper p+p{
+  margin-top:0
+}
+.mood{
+  font-family:"Caveat",cursive;
+  font-size:21px;color:var(--muted)
+}
+.mood span{
+  text-decoration:underline wavy var(--primary);
+  text-underline-offset:5px
+}
+.j-foot{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  width:min(840px,calc(100% - 40px));
+  margin:0 auto;
+  padding:26px 0 34px;
+  border-top:1px dashed var(--line);
+  color:var(--muted);font-size:14px
+}
+.j-foot a{
+  color:var(--primary);
+  font-weight:600
+}
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px
+}
+@media (max-width:650px){
+  .j-head{flex-direction:column}
+  .sticky{flex:none;align-self:flex-end;width:190px;margin-top:-6px}
+  .entry{grid-template-columns:1fr;gap:6px}
+  .entry time{text-align:left;display:flex;align-items:baseline;gap:8px;padding-top:0}
+  .entry time b{font-size:44px}
+  .paper{padding:18px 18px 20px 40px}
+  .paper::before{left:26px}
+}
+</style>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="My Little Universe home">
+      <span class="brand-mark">✳</span>
+      <span>Dunia<b>Kecilku.</b></span>
+    </a>
+
+    <nav class="floating-nav" id="floatingNav" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="aboutme.html">About</a>
+      <a class="nav-link" href="journal.html">Journey</a>
+      <a class="nav-link" href="gallery.html">Gallery</a>
+      <a class="nav-link" href="hobbies.html">Hobbies</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" title="Ganti tema">
+        <span id="themeIcon">☾</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="journal">
+    <div class="j-head">
+      <div>
+        <h1>Jurnal</h1>
+        <p>Catatan harian yang kutulis .</p>
+      </div>
+      <aside class="sticky">Asal nulis yang terlintas dalam pikiran.</aside>
+    </div>
+
+    <h2 class="month">Tahun 2026</h2>
+
+    <article class="entry">
+      <time datetime="2021-07-13"><b>13</b>Senin</time>
+      <div class="paper">
+        <h2>Pertama kali magang</h2>
+        <p>Hari itu untuk pertama kalinya aku trjun kedalam dunia kerja , 
+          karena kebetulan aku lagi menjalankan masa pkl disekolah , disini aku merasa banyak banget pengalaman ,
+          untuk siap terjun kedunia kerja secara langsung nantinya , oh iyaa aku pkl
+          di bprku cab subang.
+        </p>
+        <p class="mood">mood: <span>Menyengkan</span></p>
+      </div>
+    </article>
+    <article class="entry">
+      <time datetime="2023-10-01"><b>01</b>Kamis</time>
+      <div class="paper">
+        <h2>Fisrt Time kerja di lazatto</h2>
+        <p>Setelah lulus sekolah , aku mulai banyak masuk lamaran kerja sana sini, sampai akhirnya aku dapee
+          panggilan kerja di lazzato , itu adalah momen paling berkesan karena ku merasakan susah nya cari kerja serta 
+        dapat panggilan kerja , tapi disini aku gak lama karena jarak rumah dan tempat kerja memakan waktu 1 jam ,
+      dan menggunakan sistem shift , kalau pagi gak masalah , pas kebagian pulang malem aga khawatir ya </p>
+        <p class="mood">mood: <span>Bahagia , Terharu sekaligus bangga</span></p>
+      </div>
+    </article>
+    <article class="entry">
+      <time datetime="204-11-26"><b>26</b>Rabu</time>
+      <div class="paper">
+        <h2>Kerja sebagai karyawan tetap</h2>
+        <p>setelah kehilangan kerjaan dari lazzato , eh tapi sebelum ke tempat kerja yang saat ini aku jalani 
+          aku pernah kerja sebagai kasir juga ini jaraknya deket cuman , lingkungan yang tidak mendukung 
+          aku untuk menetap lebih lama disana , sampai akhirnya aku diterima kerja di tkg ,
+          dan tahun ini memasuki tahun ke 2 , belum tau sampai kapan disini , semoga next year atau kapanpun itu ,
+          bisa dapet yang lebih baik , walaupun ini juga baik. 
+        </p>
+        <p class="mood">mood: <span>Campur aduk</span></p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="j-foot">
+    <a href="index.html">Kembali ke Home</a>
+    <span>© <span id="year"></span> My Little Universe</span>
+  </footer>
+  <script>
+(function () {
+  var KEY = "mlu-theme";
+  var root = document.documentElement;
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) root.dataset.theme = saved;
+  } catch (e) {}
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.getElementById("themeToggle");
+    var icon = document.getElementById("themeIcon");
+    function paint() {
+      if (icon) icon.textContent = root.dataset.theme === "dark" ? "☀" : "☾";
+    }
+    paint();
+    if (toggle) toggle.addEventListener("click", function () {
+      var next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+      paint();
+    });
+
+    var menuToggle = document.getElementById("menuToggle");
+    var nav = document.getElementById("floatingNav");
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", function () {
+        var open = nav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.textContent = open ? "✕" : "☰";
+      });
+      nav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          nav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
+        });
+      });
+    }
+
+    var year = document.getElementById("year");
+    if (year) year.textContent = new Date().getFullYear();
+
+    var items = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(function (el) { io.observe(el); });
+    } else {
+      items.forEach(function (el) { el.classList.add("visible"); });
+    }
+  });
+})();
+</script>
+</body>
+</html>
