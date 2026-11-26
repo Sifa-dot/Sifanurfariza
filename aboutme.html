@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me | My Little Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+  <body>  
+  <style>
+:root{
+  --bg:#f5f4ec;
+  --surface:rgba(255,255,255,.72);
+  --surface-solid:#fffefa;
+  --text:#24483f;
+  --muted:#71877e;
+  --primary:#258d7b;
+  --primary-dark:#176b5d;
+  --mint:#cdeade;
+  --line:rgba(37,110,94,.14);
+  --shadow:0 22px 60px rgba(39,91,76,.12);
+  --cream:#f4ead7;
+  --lavender:#e9e2f0;
+  /* alias names used by other pages */
+  --card:var(--surface-solid);
+  --secondary:var(--mint);
+}
+[data-theme="dark"]{
+  --bg:#14231f;
+  --surface:rgba(35,57,50,.78);
+  --surface-solid:#20372f;
+  --text:#e4f2e9;
+  --muted:#a3b9ae;
+  --primary:#70cdb4;
+  --primary-dark:#a4e5d2;
+  --mint:#284b40;--line:rgba(172,224,204,.15);
+  --shadow:0 22px 60px rgba(0,0,0,.25);
+  --cream:#514a3c;
+  --lavender:#443d50;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .35s,color .35s}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+
+.site-header{
+  width:min(1180px,calc(100% - 48px));
+  margin:20px auto 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;gap:20px;
+  position:relative;
+  z-index:20
+}
+.brand b{
+  color:var(--primary)
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:15px;
+  letter-spacing:-.5px;
+  white-space:nowrap
+}
+.brand-mark{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  background:var(--mint);
+  color:var(--primary-dark);
+  border-radius:12px;
+  font-size:21px
+}
+.floating-nav{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:7px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:50px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px)
+}
+.nav-link:hover,.nav-link.active{
+  background:var(--mint);
+  color:var(--primary-dark)
+}
+.nav-link{
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 13px;
+  border-radius:30px;
+  transition:.25s
+}
+.header-actions{
+  display:flex;
+  gap:8px
+}
+.icon-button,.menu-toggle{
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:var(--surface);
+  color:var(--text);
+  cursor:pointer;
+  box-shadow:var(--shadow)
+}
+.icon-button{
+  font-size:18px
+}
+.menu-toggle{
+  display:none
+}
+.reveal.visible{
+    opacity:1;transform:translateY(0)
+  }
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .7s ease,transform .7s ease}
+
+@media (max-width:900px){
+  .site-header{width:calc(100% - 32px)}
+  .floating-nav{gap:0}
+  .nav-link{padding:9px;font-size:10px}
+}
+@media (max-width:650px){
+  .site-header{margin-top:12px}
+  .brand{font-size:13px}
+  .menu-toggle{display:block}
+  .floating-nav{display:none;position:absolute;top:52px;right:0;left:0;padding:12px;border-radius:20px;flex-wrap:wrap;justify-content:center;background:var(--surface-solid)}
+  .floating-nav.open{display:flex}
+  .nav-link{font-size:11px;padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.hero {
+    min-height: 690px;
+    padding: 70px 10% 90px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.eyebrow {
+    color: var(--primary);
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 6vw, 78px);
+    line-height: 1.13;
+    margin: 22px 0;
+}
+
+.hero-content h1 span,
+.section-title h2 span,
+.closing h2 span {
+    color: var(--primary);
+}
+
+.hero-content p {
+    max-width: 470px;
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.main-button {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.main-button:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.hero-art {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 390px;
+}
+
+.hero-orbit {
+    position: absolute;
+    border: 1px dashed var(--line);
+    border-radius: 50%;
+}
+
+.orbit-one {
+    width: 350px;
+    height: 350px;
+}
+
+.orbit-two {
+    width: 270px;
+    height: 270px;
+}
+
+.hero-polaroid {
+    width: 260px;
+    padding: 16px 16px 24px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    transform: rotate(5deg);
+    transition: .5s;
+    z-index: 2;
+}
+
+.hero-polaroid:hover {
+    transform: rotate(0) translateY(-10px);
+}
+
+.photo-placeholder {
+    height: 270px;
+    background: linear-gradient(145deg, #d4eddf, #9bcfb7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #39765f;
+    text-align: center;
+    gap: 8px;
+}
+
+.photo-placeholder span {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.photo-placeholder small {
+    font-size: 10px;
+}
+
+.hero-polaroid > p,
+.polaroid > p {
+    text-align: center;
+    margin-top: 15px;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+}
+
+.floating-star,
+.floating-heart {
+    position: absolute;
+    color: var(--primary);
+    font-size: 45px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.floating-star {
+    top: 20px;
+    right: 15%;
+}
+
+.floating-heart {
+    bottom: 20px;
+    left: 12%;
+    animation-delay: 1s;
+}
+
+.hero-decoration {
+    position: absolute;
+    color: var(--primary);
+    opacity: .4;
+    font-size: 55px;
+}
+
+.star {
+    top: 130px;
+    right: 6%;
+}
+
+.flower {
+    bottom: 30px;
+    left: 4%;
+}
+
+.section {
+    padding: 90px 10%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 45px);
+    margin: 15px 0;
+}
+
+.section-title > p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.intro-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 25px;
+    padding: 40px;
+    border-radius: 25px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+}
+
+.intro-icon {
+    font-size: 45px;
+}
+
+.intro-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    margin-bottom: 18px;
+}
+
+.intro-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 13px;
+}
+
+.journey {
+    background: var(--secondary);
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: var(--line);
+    transform: translateX(-50%);
+}
+
+.chapter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 65px;
+    align-items: center;
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.chapter:last-child {
+    margin-bottom: 0;
+}
+
+.chapter::before {
+    content: "✦";
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background: var(--card);
+    color: var(--primary);
+    border: 2px solid var(--line);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.chapter-photo {
+    display: flex;
+    justify-content: center;
+}
+
+.chapter-content {
+    padding: 15px;
+}
+
+.chapter-number {
+    display: block;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.chapter-date {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+.chapter-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin: 13px 0;
+}
+
+.chapter-content p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+    max-width: 420px;
+}
+
+.chapter-sticker {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: var(--card);
+    border-radius: 20px;
+    color: var(--primary);
+    font-size: 11px;
+    transform: rotate(-2deg);
+}
+
+
+.polaroid {
+    width: 255px;
+    padding: 15px 15px 25px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    transform: rotate(4deg);
+    transition: .4s;
+}
+
+.photo-placeholder{
+  overflow:hidden;     
+}
+.photo-placeholder img{
+  width:100%;
+  height:100%;
+  object-fit:cover;     
+  display:block;
+}
+
+.photo-placeholder img{
+  width:100%;
+  height:100%;
+  object-fit:cover;   
+  display:block;
+}
+.polaroid:hover {
+    transform: rotate(0) scale(1.04);
+}
+
+.polaroid .photo-placeholder {
+    height: 260px;
+}
+
+.rotate-left {
+    transform: rotate(-5deg);
+}
+
+.rotate-left:hover {
+    transform: rotate(0) scale(1.04);
+}
+
+.future-art {
+    height: 260px;
+    background: linear-gradient(145deg, #b7e3d0, #76b99b);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #285b48;
+    gap: 12px;
+}
+
+.future-art span {
+    font-size: 55px;
+}
+
+.future-art strong {
+    letter-spacing: 3px;
+    font-size: 13px;
+}
+
+.future-art small {
+    font-size: 11px;
+}
+
+.closing {
+    margin: 90px 10%;
+    padding: 75px;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(135deg, #286f5b, #65b99b);
+    position: relative;
+    overflow: hidden;
+}
+
+.closing-content {
+    max-width: 570px;
+    position: relative;
+    z-index: 2;
+}
+
+.closing .eyebrow {
+    color: #d4f5e4;
+}
+
+.closing h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(35px, 5vw, 55px);
+    margin: 20px 0;
+}
+
+.closing h2 span {
+    color: #d4f5e4;
+}
+
+.closing p {
+    color: #e2f6eb;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.signature {
+    margin-top: 30px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.closing-decoration {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    font-size: 220px;
+    opacity: .15;
+}
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 2.2;
+}
+
+footer a {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@media (max-width: 900px) {
+
+
+    .hero {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .chapter {
+        gap: 35px;
+    }
+
+    .polaroid {
+        width: 220px;
+    }
+
+    .polaroid .photo-placeholder,
+    .future-art {
+        height: 220px;
+    }
+}
+
+@media (max-width: 650px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 60px;
+    }
+
+    .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-art {
+        margin-top: 25px;
+    }
+
+    .section {
+        padding: 65px 7%;
+    }
+
+    .intro-card {
+        grid-template-columns: 1fr;
+        padding: 25px;
+    }
+
+    .timeline::before {
+        left: 13px;
+    }
+
+    .chapter,
+    .chapter.reverse {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-bottom: 70px;
+        padding-left: 38px;
+    }
+
+    .chapter::before {
+        left: 13px;
+        top: 12px;
+        transform: translateX(-50%);
+    }
+
+    .chapter-photo {
+        justify-content: center;
+    }
+
+    .chapter-content {
+        padding: 10px 0;
+    }
+
+    .chapter-content h3 {
+        font-size: 28px;
+    }
+
+    .polaroid {
+        width: min(255px, 100%);
+    }
+
+    .polaroid .photo-placeholder,
+    .future-art {
+        height: 250px;
+    }
+
+    .closing {
+        margin: 50px 5%;
+        padding: 40px 25px;
+    }
+
+    .closing-decoration {
+        font-size: 120px;
+        right: -15px;
+        top: 50%;
+    }
+}
+</style>
+
+      <header class="site-header">
+    <a class="brand" href="index.html" aria-label="My Little Universe home">
+      <span class="brand-mark">✳</span>
+      <span>Dunia<b>Kecilku.</b></span>
+    </a>
+
+    <nav class="floating-nav" id="floatingNav" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link active" href="aboutme.html">About</a>
+      <a class="nav-link" href="journal.html">Journey</a>
+      <a class="nav-link" href="gallery.html">Gallery</a>
+      <a class="nav-link" href="hobbies.html">Hobbies</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" title="Ganti tema">
+        <span id="themeIcon">☾</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+    <header class="hero">
+        <div class="hero-decoration star">✦</div>
+        <div class="hero-decoration flower">✿</div>
+
+        <div class="hero-content">
+            <span class="eyebrow">Perjalanan Membentuk Diri</span>
+            <h1>Setiap Cerita<br>Adalah <span>Perjalanan</span></h1>
+
+            <p>
+                Setiap perjalanan memiliki cerita.
+                Ini adalah kumpulan kenangan, pengalaman,
+                dan proses kecil yang membentuk diriku hari ini.
+            </p>
+
+            <a href="#journey" class="main-button">Explore My Journey ↓</a>
+        </div>
+
+        <div class="hero-art">
+            <div class="hero-orbit orbit-one"></div>
+            <div class="hero-orbit orbit-two"></div>
+
+            <div class="hero-polaroid">
+                <div class="photo-placeholder">
+                    <img src="photo-3.jpeg" alt="">
+                </div>
+                <p>A little piece of me</p>
+            </div>
+
+            <span class="floating-star">✧</span>
+            <span class="floating-heart">♡</span>
+        </div>
+    </header>
+
+    <section class="intro section">
+        <div class="section-title">
+            <span class="eyebrow">A LITTLE INTRODUCTION</span>
+            <h2>Ceritaku, <span>Perjalananku</span></h2>
+        </div>
+
+        <div class="intro-card reveal">
+            <div class="intro-icon">📖</div>
+            <div>
+                <h3>Selamat berkenalan teman teman!</h3>
+                <p>
+                    Halo! Aku adalah seseorang yang masih terus belajar,
+                    tumbuh, dan menemukan banyak hal baru dalam kehidupan.
+                    Setiap fase memiliki pengalaman dan pelajarannya sendiri.
+                </p>
+                <p>
+                    Melalui halaman ini, aku ingin menyimpan beberapa
+                    potongan perjalanan hidupku, mulai dari masa kecil,
+                    masa sekolah, hingga perjalanan yang sedang aku jalani
+                    sekarang.
+                </p>
+                <p>
+                    Tidak harus selalu sempurna. Bagiku, setiap langkah
+                    kecil tetap menjadi bagian berharga dari sebuah cerita.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="journey section" id="journey">
+        <div class="section-title">
+            <span class="eyebrow">MY PERSONAL TIMELINE</span>
+            <h2>The Chapters of <span>My Life</span></h2>
+            <p>Enam bab kecil dari perjalanan panjangku.</p>
+        </div>
+
+        <div class="timeline">
+
+            <article class="chapter reveal">
+                <div class="chapter-photo">
+                    <div class="polaroid">
+                        <div class="photo-placeholder">
+                            <span>FOTO MASA KECIL</span>
+                            <img src="photo-4.jpeg" alt="">
+                        </div>
+                        <p>My Little Beginning ♡</p>
+                    </div>
+                </div>
+
+                <div class="chapter-content">
+                    <span class="chapter-number">CHAPTER 01</span>
+                    <span class="chapter-date">28 OCTOBER 2004</span>
+                    <h3>The Beginning</h3>
+                    <p>
+                        Semua cerita memiliki awal. Perjalananku dimulai
+                        pada tanggal 28 Oktober 2004. Sebuah awal dari
+                        banyak pengalaman, kenangan, dan cerita yang
+                        akan terus bertambah seiring waktu.
+                    </p>
+                    <span class="chapter-sticker">✿ Aku kecil</span>
+                </div>
+            </article>
+
+            <article class="chapter reverse reveal">
+                <div class="chapter-photo">
+                    <div class="polaroid rotate-left">
+                        <div class="photo-placeholder">
+                        <img src="photo-5.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-content">
+                    <span class="chapter-number">CHAPTER 02</span>
+                    <span class="chapter-date">Sekolah Dasar</span>
+                    <h3>Memori Kecil</h3>
+                    <p>
+                        Masa sekolah dasar menjadi salah satu bagian
+                        dari perjalanan yang penuh cerita. Di masa ini,
+                        aku mulai mengenal lingkungan baru dan belajar berinteraksi.
+                    </p>
+                    <span class="chapter-sticker">♡ Sweet memories</span>
+                </div>
+            </article>
+
+            <article class="chapter reveal">
+                <div class="chapter-photo">
+                    <div class="polaroid rotate-left">
+                        <div class="photo-placeholder">
+                            <img src="photo-6.jpeg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-content">
+                    <span class="chapter-number">CHAPTER 03</span>
+                    <span class="chapter-date">Sekolah Menengah Pertama</span>
+                    <h3>Pertumbuhan Remaja</h3>
+                    <p>
+                        Memasuki masa remaja, ada banyak pengalaman
+                        baru yang aku temui. Aku mulai mengenal
+                        kegiatan sekolah, pertemanan, organisasi,
+                        dan belajar memahami diriku sendiri.
+                    </p>
+                    <span class="chapter-sticker">✧ Learning every day</span>
+                </div>
+            </article>
+
+            <article class="chapter reverse reveal">
+                <div class="chapter-photo">
+                    <div class="polaroid">
+                        <div class="photo-placeholder">
+                           <img src="photo-7.jpeg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-content">
+                    <span class="chapter-number">CHAPTER 04</span>
+                    <span class="chapter-date">Sekolah Menengah Kejuruan</span>
+                    <h3>Menemukan Siapa , aku?</h3>
+                    <p>
+                        Masa SMK menjadi fase untuk mencoba hal-hal
+                        baru dan mengembangkan kemampuan. Aku belajar
+                        bahwa proses menemukan minat dan tujuan
+                        membutuhkan waktu serta keberanian untuk mencoba.
+                    </p>
+                    <span class="chapter-sticker">🌱 Keep growing</span>
+                </div>
+            </article>
+
+            <article class="chapter reveal">
+                <div class="chapter-photo">
+                    <div class="polaroid rotate-left">
+                        <div class="photo-placeholder">
+                            <img src="photo-8.jpeg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-content">
+                    <span class="chapter-number">CHAPTER 05</span>
+                    <span class="chapter-date">Kuliah</span>
+                    <h3>Mencari Tujuan</h3>
+                    <p>
+                        Saat ini aku sedang menjalani dua peran ,
+                        mahasiswa dan karyawan , dan selama sekolah 
+                        aku belum terjun  pada dunia teknik, dan aku mencoba
+                        keluar dari zona nyaman , semoga yang pertama ini berhasil aku taklukan.
+                    </p>
+                    <span class="chapter-sticker">💻 Create something new</span>
+                </div>
+            </article>
+
+
+            <article class="chapter reverse reveal">
+                <div class="chapter-photo">
+                    <div class="polaroid">
+                        <div class="future-art">
+                            <img src="photo-9.jpeg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-content">
+                    <span class="chapter-number">CHAPTER 06</span>
+                    <span class="chapter-date">Aku Saat Ini</span>
+                    <h3>Untuk diri</h3>
+                    <p>
+                        Masih banyak hal yang ingin aku capai dan
+                        pelajari. Aku ingin menjadi pribadi yang
+                        mandiri, terus berkembang, dan mampu
+                        mewujudkan impian melalui usaha dan
+                        pengalaman yang aku jalani.
+                    </p>
+                    <span class="chapter-sticker">☆ The best is yet to come</span>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="closing">
+        <div class="closing-content">
+            <span class="eyebrow">Sedikit tulisan untuk aku ,</span>
+            <h2>My Story Is Still<br><span>Kalau dimasa depan berhasil , jangan lupa buka web ini lagi yaa</span></h2>
+            <p>
+                Aku mungkin belum sampai di tempat yang aku impikan,
+                tetapi aku bangga dengan setiap langkah yang sudah
+                aku lalui. Terus bertumbuh, terus belajar, dan jangan
+                berhenti percaya pada diri sendiri.
+            </p>
+            <div class="signature">With love, me ♡</div>
+        </div>
+        <div class="closing-decoration">✿</div>
+    </section>
+
+    <footer>
+        <p>Made with ♡ by Me</p>
+        <p>© <span id="year"></span> My Little Universe</p>
+        <a href="index.html">← Back to Home</a>
+    </footer>
+     <script>
+(function () {
+  var KEY = "mlu-theme";
+  var root = document.documentElement;
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) root.dataset.theme = saved;
+  } catch (e) {}
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.getElementById("themeToggle");
+    var icon = document.getElementById("themeIcon");
+    function paint() {
+      if (icon) icon.textContent = root.dataset.theme === "dark" ? "☀" : "☾";
+    }
+    paint();
+    if (toggle) toggle.addEventListener("click", function () {
+      var next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+      paint();
+    });
+
+    var menuToggle = document.getElementById("menuToggle");
+    var nav = document.getElementById("floatingNav");
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", function () {
+        var open = nav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.textContent = open ? "✕" : "☰";
+      });
+      nav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          nav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
+        });
+      });
+    }
+    var year = document.getElementById("year");
+    if (year) year.textContent = new Date().getFullYear();
+
+    var items = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(function (el) { io.observe(el); });
+    } else {
+      items.forEach(function (el) { el.classList.add("visible"); });
+    }
+  });
+})();
+</script>
+</body>
+</html>

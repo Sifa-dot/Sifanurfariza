@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Memories | My Little Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  <style>
+:root{
+  --bg:#f5f4ec;
+  --surface:rgba(255,255,255,.72);
+  --surface-solid:#fffefa;
+  --text:#24483f;
+  --muted:#71877e;
+  --primary:#258d7b;
+  --primary-dark:#176b5d;
+  --mint:#cdeade;
+  --line:rgba(37,110,94,.14);
+  --shadow:0 22px 60px rgba(39,91,76,.12);
+  --cream:#f4ead7;
+  --lavender:#e9e2f0;
+  /* alias names used by other pages */
+  --card:var(--surface-solid);
+  --secondary:var(--mint);
+}
+[data-theme="dark"]{
+  --bg:#14231f;
+  --surface:rgba(35,57,50,.78);
+  --surface-solid:#20372f;
+  --text:#e4f2e9;
+  --muted:#a3b9ae;
+  --primary:#70cdb4;
+  --primary-dark:#a4e5d2;
+  --mint:#284b40;--line:rgba(172,224,204,.15);
+  --shadow:0 22px 60px rgba(0,0,0,.25);
+  --cream:#514a3c;
+  --lavender:#443d50;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .35s,color .35s}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+
+.site-header{
+  width:min(1180px,calc(100% - 48px));
+  margin:20px auto 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;gap:20px;
+  position:relative;
+  z-index:20
+}
+.brand b{
+  color:var(--primary)
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:15px;
+  letter-spacing:-.5px;
+  white-space:nowrap
+}
+.brand-mark{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  background:var(--mint);
+  color:var(--primary-dark);
+  border-radius:12px;
+  font-size:21px
+}
+.floating-nav{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:7px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:50px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px)
+}
+.nav-link:hover,.nav-link.active{
+  background:var(--mint);
+  color:var(--primary-dark)
+}
+.nav-link{
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 13px;
+  border-radius:30px;
+  transition:.25s
+}
+.header-actions{
+  display:flex;
+  gap:8px
+}
+.icon-button,.menu-toggle{
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:var(--surface);
+  color:var(--text);
+  cursor:pointer;
+  box-shadow:var(--shadow)
+}
+.icon-button{
+  font-size:18px
+}
+.menu-toggle{
+  display:none
+}
+.reveal.visible{
+    opacity:1;transform:translateY(0)
+  }
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .7s ease,transform .7s ease}
+
+@media (max-width:900px){
+  .site-header{width:calc(100% - 32px)}
+  .floating-nav{gap:0}
+  .nav-link{padding:9px;font-size:10px}
+}
+@media (max-width:650px){
+  .site-header{margin-top:12px}
+  .brand{font-size:13px}
+  .menu-toggle{display:block}
+  .floating-nav{display:none;position:absolute;top:52px;right:0;left:0;padding:12px;border-radius:20px;flex-wrap:wrap;justify-content:center;background:var(--surface-solid)}
+  .floating-nav.open{display:flex}
+  .nav-link{font-size:11px;padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.gallery{
+  width:min(1040px,calc(100% - 40px));
+  margin:0 auto;
+  padding:48px 0 60px
+}
+.g-head{
+  max-width:560px;
+  margin-bottom:44px
+}
+.g-head h1{
+  font-family:"Caveat",cursive;
+  font-size:clamp(60px,10vw,96px);
+  font-weight:700;
+  line-height:.95;
+  letter-spacing:0;
+  transform:rotate(-1deg);
+  transform-origin:left bottom
+}
+.g-head p{
+  margin-top:16px;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.7;
+  max-width:44ch
+}
+.wall{
+  columns:3 260px;
+  column-gap:26px
+}
+.frame{
+  display:block;
+  width:100%;
+  margin:0 0 28px;
+  padding:10px 10px 4px;
+  break-inside:avoid;
+  background:var(--surface-solid);
+  border:1px solid var(--line);
+  border-radius:3px;
+  box-shadow:var(--shadow);
+  color:var(--text);
+  text-align:left;
+  cursor:zoom-in
+}
+.frame:nth-child(3n+1){
+  transform:rotate(-.9deg)
+}
+.frame:nth-child(3n+2){
+  transform:rotate(.7deg)
+}
+.frame img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:1px
+}
+.cap{
+  display:block;
+  padding:10px 4px 8px;
+  font-family:"Caveat",cursive;
+  font-size:23px;
+  line-height:1.1
+}
+.ph{display:none;
+  aspect-ratio:var(--r,4/5);
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:var(--mint);
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+  text-align:center
+}
+.frame.missing{
+  cursor:default
+}
+.frame.missing img{
+  display:none
+}
+.frame.missing .ph{
+  display:flex
+}
+dialog{
+  margin:auto;
+  max-width:min(920px,94vw);
+  max-height:94vh;
+  padding:14px 14px 10px;
+  background:var(--surface-solid);
+  color:var(--text);
+  border:0;
+  border-radius:4px;
+  box-shadow:0 20px 70px rgba(0,0,0,.45)
+}
+dialog::backdrop{
+  background:rgba(10,20,17,.78)
+}
+dialog img{
+  display:block;
+  max-width:100%;
+  max-height:76vh;
+  margin:0 auto
+}
+dialog p{
+  padding:10px 4px 2px;
+  font-family:"Caveat",cursive;
+  font-size:26px;
+  text-align:center
+}
+.lb-bar{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:6px
+}
+.lb-bar button{
+  padding:8px 16px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  font-size:14px
+}
+.lb-bar button:hover{
+  background:var(--mint)
+}
+.g-foot{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  width:min(1040px,calc(100% - 40px));
+  margin:0 auto;
+  padding:26px 0 34px;
+  border-top:1px dashed var(--line);
+  color:var(--muted);
+  font-size:14px
+}
+.g-foot a{
+  color:var(--primary);
+  font-weight:600
+}
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px
+}
+@media (max-width:650px)
+{.g-head{margin-bottom:30px}
+.wall{columns:2 140px;column-gap:14px}
+.frame{margin-bottom:18px;padding:7px 7px 2px}
+.cap{font-size:19px;padding:8px 2px 6px}}
+</style>
+
+<header class="site-header">
+    <a class="brand" href="index.html" aria-label="My Little Universe home">
+      <span class="brand-mark">✳</span>
+      <span>Dunia<b>Kecilku.</b></span>
+    </a>
+
+    <nav class="floating-nav" id="floatingNav" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="aboutme.html">About</a>
+      <a class="nav-link" href="education.html">Journey</a>
+      <a class="nav-link active" href="gallery.html">Gallery</a>
+      <a class="nav-link" href="hobbies.html">Hobbies</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" title="Ganti tema">
+        <span id="themeIcon">☾</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="gallery">
+    <div class="g-head">
+      <h1>Little Memories</h1>
+      <p>Foto-foto yang pengin kusimpan. Klik salah satu untuk melihatnya lebih besar.</p>
+    </div>
+
+    <div class="wall">
+      <button class="frame" type="button" data-cap="With Adik Kecil" style="--r:4/5">
+        <img src="photo-10.jpeg" alt="Foto contoh 1: With Adik Kecil" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">With Adik Kecil</span>
+      </button>
+      <button class="frame" type="button" data-cap="Aku kalau dicurug" style="--r:1/1">
+        <img src="photo-11.jpeg" alt="Foto contoh 2: Aku kalau dicurug" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">Aku kalau dicurug</span>
+      </button>
+      <button class="frame" type="button" data-cap="Temen ku nikah" style="--r:3/4">
+        <img src="photo-13.jpeg" alt="Foto contoh 3: Temen ku nikah" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">Temen ku nikah </span>
+      </button>
+      <button class="frame" type="button" data-cap="Foto pertama kuliah" style="--r:4/3">
+        <img src="photo-12.jpeg" alt="Foto contoh 4: Foto pertama kuliah" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">Foto pertama kali kuliah</span>
+      </button>
+      <button class="frame" type="button" data-cap="Perpus" style="--r:4/5">
+        <img src="photo-14.jpeg" alt="Foto contoh 5: Perpus" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">Perpus</span>
+      </button>
+      <button class="frame" type="button" data-cap="Makan bareng" style="--r:1/1">
+        <img src="photo-15.jpeg" alt="Foto contoh 6: Makan bareng" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">Makan bareng</span>
+      </button>
+      <button class="frame" type="button" data-cap="With sahabat" style="--r:3/4">
+        <img src="photo-16.jpeg" alt="Foto contoh 7: with sahabat" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">With sahabat</span>
+      </button>
+      <button class="frame" type="button" data-cap="With sahabat part2" style="--r:4/3">
+        <img src="photo-17.jpeg" alt="Foto contoh 8: With Sahabat part2" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">With sahabat part2</span>
+      </button>
+      <button class="frame" type="button" data-cap="sunrise" style="--r:4/5">
+        <img src="photo-19.jpeg" alt="Foto contoh 9: sunrise" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">sunrise</span>
+      </button>
+      <button class="frame" type="button" data-cap="me" style="--r:4/5">
+        <img src="photo-20.jpeg" alt="Foto contoh 9: me" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">me</span>
+      </button>
+      <button class="frame" type="button" data-cap="sister" style="--r:4/5">
+        <img src="photo-21.jpeg" alt="Foto contoh 9: sister" loading="lazy" onerror="this.closest('.frame').classList.add('missing')">
+        <span class="cap">sister</span>
+      </button>
+    </div>
+  </main>
+
+  <dialog id="lightbox" aria-label="Foto ukuran besar">
+    <img alt="">
+    <p id="lbCap"></p>
+    <div class="lb-bar">
+      <button type="button" id="lbPrev">Sebelumnya</button>
+      <button type="button" id="lbClose">Tutup</button>
+      <button type="button" id="lbNext">Berikutnya</button>
+    </div>
+  </dialog>
+
+  <footer class="g-foot">
+    <a href="index.html">Kembali ke Home</a>
+    <span>© <span id="year"></span> My Little Universe</span>
+  </footer>
+
+  <script>
+(function () {
+  var KEY = "mlu-theme";
+  var root = document.documentElement;
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) root.dataset.theme = saved;
+  } catch (e) {}
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    var toggle = document.getElementById("themeToggle");
+    var icon = document.getElementById("themeIcon");
+    function paint() {
+      if (icon) icon.textContent = root.dataset.theme === "dark" ? "☀" : "☾";
+    }
+    paint();
+    if (toggle) toggle.addEventListener("click", function () {
+      var next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+      paint();
+    });
+
+    var menuToggle = document.getElementById("menuToggle");
+    var nav = document.getElementById("floatingNav");
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", function () {
+        var open = nav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.textContent = open ? "✕" : "☰";
+      });
+      nav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          nav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
+        });
+      });
+    }
+
+    var year = document.getElementById("year");
+    if (year) year.textContent = new Date().getFullYear();
+
+    var items = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(function (el) { io.observe(el); });
+    } else {
+      items.forEach(function (el) { el.classList.add("visible"); });
+    }
+  });
+})();
+const frames=[...document.querySelectorAll(".frame")];
+const lb=document.getElementById("lightbox"),lbImg=lb.querySelector("img"),lbCap=document.getElementById("lbCap");
+let cur=0;
+function show(i,step){
+  for(let n=0;n<frames.length;n++){
+    cur=(i+n*step+frames.length*frames.length)%frames.length;
+    if(!frames[cur].classList.contains("missing")) break;
+  }
+  const f=frames[cur],im=f.querySelector("img");
+  lbImg.src=im.currentSrc||im.src; lbImg.alt=im.alt; lbCap.textContent=f.dataset.cap;
+}
+frames.forEach((f,i)=>f.addEventListener("click",()=>{ if(f.classList.contains("missing")) return; show(i,1); lb.showModal(); }));
+document.getElementById("lbPrev").onclick=()=>show(cur-1,-1);
+document.getElementById("lbNext").onclick=()=>show(cur+1,1);
+document.getElementById("lbClose").onclick=()=>lb.close();
+lb.addEventListener("click",e=>{ if(e.target===lb) lb.close(); });
+document.addEventListener("keydown",e=>{
+  if(!lb.open) return;
+  if(e.key==="ArrowLeft") show(cur-1,-1);
+  if(e.key==="ArrowRight") show(cur+1,1);
+});
+</script>
+</body>
+</html>

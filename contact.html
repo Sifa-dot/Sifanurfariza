@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | My Little Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  <style>
+:root{
+  --bg:#f5f4ec;
+  --surface:rgba(255,255,255,.72);
+  --surface-solid:#fffefa;
+  --text:#24483f;
+  --muted:#71877e;
+  --primary:#258d7b;
+  --primary-dark:#176b5d;
+  --mint:#cdeade;
+  --line:rgba(37,110,94,.14);
+  --shadow:0 22px 60px rgba(39,91,76,.12);
+  --cream:#f4ead7;
+  --lavender:#e9e2f0;
+  /* alias names used by other pages */
+  --card:var(--surface-solid);
+  --secondary:var(--mint);
+}
+[data-theme="dark"]{
+  --bg:#14231f;
+  --surface:rgba(35,57,50,.78);
+  --surface-solid:#20372f;
+  --text:#e4f2e9;
+  --muted:#a3b9ae;
+  --primary:#70cdb4;
+  --primary-dark:#a4e5d2;
+  --mint:#284b40;--line:rgba(172,224,204,.15);
+  --shadow:0 22px 60px rgba(0,0,0,.25);
+  --cream:#514a3c;
+  --lavender:#443d50;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .35s,color .35s}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+
+
+.site-header{
+  width:min(1180px,calc(100% - 48px));
+  margin:20px auto 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;gap:20px;
+  position:relative;
+  z-index:20
+}
+.brand b{
+  color:var(--primary)
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:15px;
+  letter-spacing:-.5px;
+  white-space:nowrap
+}
+.brand-mark{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  background:var(--mint);
+  color:var(--primary-dark);
+  border-radius:12px;
+  font-size:21px
+}
+.floating-nav{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:7px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:50px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px)
+}
+.nav-link:hover,.nav-link.active{
+  background:var(--mint);
+  color:var(--primary-dark)
+}
+.nav-link{
+  font-size:11px;
+  color:var(--muted);
+  padding:10px 13px;
+  border-radius:30px;
+  transition:.25s
+}
+.header-actions{
+  display:flex;
+  gap:8px
+}
+.icon-button,.menu-toggle{
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:var(--surface);
+  color:var(--text);
+  cursor:pointer;
+  box-shadow:var(--shadow)
+}
+.icon-button{
+  font-size:18px
+}
+.menu-toggle{
+  display:none
+}
+.reveal.visible{
+    opacity:1;transform:translateY(0)
+  }
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .7s ease,transform .7s ease}
+
+@media (max-width:900px){
+  .site-header{width:calc(100% - 32px)}
+  .floating-nav{gap:0}
+  .nav-link{padding:9px;font-size:10px}
+}
+@media (max-width:650px){
+  .site-header{margin-top:12px}
+  .brand{font-size:13px}
+  .menu-toggle{display:block}
+  .floating-nav{display:none;position:absolute;top:52px;right:0;left:0;padding:12px;border-radius:20px;flex-wrap:wrap;justify-content:center;background:var(--surface-solid)}
+  .floating-nav.open{display:flex}
+  .nav-link{font-size:11px;padding:10px 12px}
+} 
+.menu-toggle{display:grid;place-items:center;font-size:22px;line-height:1;padding-bottom:4px}
+.floating-nav,.floating-nav.open{position:absolute;top:52px;right:0;left:auto;min-width:200px;flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:flex-start;gap:2px;padding:8px;border-radius:16px;background:var(--surface-solid);backdrop-filter:none;z-index:30}
+.floating-nav{display:none}
+.floating-nav.open{display:flex}
+.nav-link{padding:10px 14px;font-size:14px;border-radius:10px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+.contact
+{width:min(980px,calc(100% - 40px));
+  margin:0 auto;
+  padding:52px 0 60px
+}
+.c-head{
+  max-width:560px;
+  margin-bottom:40px
+}
+.c-head h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(40px,7vw,66px);
+  font-weight:600;line-height:1.08;
+  letter-spacing:-1.2px
+}
+.c-head p{
+  margin-top:16px;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.75;
+  max-width:44ch
+}
+.card{
+  display:grid;
+  grid-template-columns:1.25fr 1fr;
+  background:var(--surface-solid);
+  border:1px solid var(--line);
+  border-radius:4px;
+  box-shadow:var(--shadow);
+  transform:rotate(-.4deg)
+}
+.msg{
+  padding:30px 34px 30px;
+  border-right:2px dashed var(--line)
+}
+.msg h2{
+  font-family:"Caveat",cursive;
+  font-size:38px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:0;
+  margin-bottom:10px
+}
+.field{
+  display:block;
+  margin-bottom:14px
+}
+.field span{
+  display:block;
+  margin-bottom:4px;
+  font-size:13px;
+  color:var(--muted)
+}
+input,textarea{
+  width:100%;
+  font:inherit;
+  font-size:16px;
+  color:var(--text);
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--line);
+  padding:6px 2px;
+  border-radius:0
+}
+textarea{
+  display:block;
+  height:160px;
+  resize:vertical;
+  border:1px solid var(--line);
+  padding:2px 12px;
+  line-height:32px;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--line) 31px 32px);
+  background-position:0 2px
+}
+input:focus,textarea:focus{
+  outline:2px solid var(--primary);
+  outline-offset:2px
+}
+.send{
+  margin-top:6px;
+  padding:11px 20px;
+  border:0;
+  border-radius:6px;
+  background:var(--primary);
+  color:var(--surface-solid);
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer
+}
+.send:hover{
+  background:var(--primary-dark)
+}
+.send:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px
+}
+
+.addr{
+  padding:26px 30px 30px;
+  display:flex;
+  flex-direction:column
+}
+.stamp{
+  align-self:flex-end;
+  width:78px;
+  height:92px;
+  margin-bottom:26px;
+  display:grid;
+  place-content:center;
+  text-align:center;
+  border:2px dashed var(--primary);
+  color:var(--primary);
+  font-family:"Caveat",cursive;
+  font-size:21px;
+  line-height:1.05;
+  transform:rotate(3deg)
+}
+.stamp b{
+  display:block;
+  font-size:30px
+}
+.line{
+  display:block;
+  padding:12px 0 6px;
+  border-bottom:1px solid var(--line)
+}
+.line small{
+  display:block;
+  font-size:12px;
+  color:var(--muted)
+}
+.line a{
+  font-size:17px;
+  font-weight:600;
+  color:var(--text)
+}
+.line a:hover{
+  color:var(--primary)
+}
+.reply{
+  margin-top:auto;
+  padding-top:22px;
+  font-family:"Caveat",cursive;
+  font-size:22px;
+  line-height:1.2;
+  color:var(--muted)
+}
+.c-foot{display:flex;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  width:min(980px,calc(100% - 40px));
+  margin:0 auto;
+  padding:26px 0 34px;
+  border-top:1px dashed var(--line);
+  color:var(--muted);
+  font-size:14px
+}
+.c-foot a{
+  color:var(--primary);
+  font-weight:600
+}
+a:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px
+}
+@media (max-width:760px){.card{grid-template-columns:1fr;transform:none}.msg{border-right:0;border-bottom:2px dashed var(--line);padding:24px 20px}.addr{padding:22px 20px 26px}.stamp{position:static;margin-bottom:12px}.reply{padding-top:16px}}
+</style>
+<header class="site-header">
+    <a class="brand" href="index.html" aria-label="My Little Universe home">
+      <span class="brand-mark">✳</span>
+      <span>Dunia<b>Kecilku.</b></span>
+    </a>
+
+    <nav class="floating-nav" id="floatingNav" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="aboutme.html">About</a>
+      <a class="nav-link" href="gallery.html">Gallery</a>
+      <a class="nav-link" href="hobbies.html">Hobbies</a>
+      <a class="nav-link" href="journal.html">Journal</a>
+      <a class="nav-link active" href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" title="Ganti tema">
+        <span id="themeIcon">☾</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">⋯</button>
+    </div>
+  </header>
+
+  <main class="contact">
+    <div class="c-head">
+      <h1>Kritik dan Saran</h1>
+      <p>Tulis kritik serta saran , lalu kirim ke email aku hehehe.</p>
+    </div>
+
+    <div class="card">
+      <form class="msg" id="mailForm">
+        <h2>Halo,</h2>
+        <label class="field"><span>Namamu</span><input id="cName" type="text" autocomplete="name"></label>
+        <label class="field"><span>Pesanmu</span><textarea id="cMsg" required></textarea></label>
+        <button class="send" type="submit">Kirim lewat email</button>
+      </form>
+
+      <aside class="addr" aria-label="Kontak">
+        <div class="stamp"><b>2026</b>dari aku</div>
+        <div class="line"><small>Email</small><a data-contact="email" href="#">Sifanurfariza23@gmail.com</a></div>
+        <div class="line"><small>WhatsApp</small><a data-contact="whatsapp" href="#">08990680486</a></div>
+        <div class="line"><small>Instagram</small><a data-contact="instagram" href="#">Sifanurfariza_</a></div>
+        <p class="reply">Biasanya dibales kalau gak lupa.</p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="c-foot">
+    <a href="index.html">Kembali ke Home</a>
+    <span>© <span id="year"></span> My Little Universe</span>
+  </footer>
+  <script>
+
+(function () {
+  var KEY = "mlu-theme";
+  var root = document.documentElement;
+
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) root.dataset.theme = saved;
+  } catch (e) {}
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Theme toggle
+    var toggle = document.getElementById("themeToggle");
+    var icon = document.getElementById("themeIcon");
+    function paint() {
+      if (icon) icon.textContent = root.dataset.theme === "dark" ? "☀" : "☾";
+    }
+    paint();
+    if (toggle) toggle.addEventListener("click", function () {
+      var next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+      paint();
+    });
+
+    
+    var menuToggle = document.getElementById("menuToggle");
+    var nav = document.getElementById("floatingNav");
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", function () {
+        var open = nav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.textContent = open ? "✕" : "⋯";
+      });
+      function closeMenu() { nav.classList.remove("open"); menuToggle.setAttribute("aria-expanded", "false"); menuToggle.textContent = "⋯"; }
+      document.addEventListener("click", function (e) { if (!nav.contains(e.target) && !menuToggle.contains(e.target)) closeMenu(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+      nav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          nav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "⋯";
+        });
+      });
+    }
+
+ 
+    var year = document.getElementById("year");
+    if (year) year.textContent = new Date().getFullYear();
+
+    
+    var items = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(function (el) { io.observe(el); });
+    } else {
+      items.forEach(function (el) { el.classList.add("visible"); });
+    }
+  });
+})();
+
+const CONTACT = {
+  email: "Sifanurfariza23@gmail.com",
+  whatsappNumber: "08990680486",      // format internasional, tanpa + atau spasi
+  whatsappLabel: "08990680486",   // tulisan yang tampil
+  instagram: "Sifanurfariza_"               // tanpa @
+};
+
+const setLink = (key, text, href) => {
+  const el = document.querySelector('[data-contact="' + key + '"]');
+  if (el) { el.textContent = text; el.href = href; }
+};
+setLink("email", CONTACT.email, "mailto:" + CONTACT.email);
+setLink("whatsapp", CONTACT.whatsappLabel, "https://wa.me/" + CONTACT.whatsappNumber);
+setLink("instagram", "@" + CONTACT.instagram, "https://instagram.com/" + CONTACT.instagram);
+
+document.getElementById("mailForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = document.getElementById("cName").value.trim();
+  const text = document.getElementById("cMsg").value.trim();
+  const body = text + (name ? "\n\n" + name : "");
+  location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent("Pesan dari website") + "&body=" + encodeURIComponent(body);
+});
+</script>
+</body>
+</html>
